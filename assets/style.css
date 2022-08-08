@@ -1,0 +1,19 @@
+.taskrow {
+    display: flex
+}
+
+.task-indicator {
+    height: 1em;
+    width: 1em;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.taskrow:hover {
+    background: #eeeeee;
+}
+
+.far_from_due { background: green;}
+.close_to_due { background: yellow;}
+.imminently_due { background: red;}
+.overdue { background: black;}
