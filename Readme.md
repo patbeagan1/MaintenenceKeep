@@ -35,3 +35,6 @@ The columns are
 |-|-|-|
 |wash the dog|2419200|1660021119|
 
+## Roadmap
+
+- Timestamps are cheap - make this be append only. Then we can just grab the max timestamp per name.
