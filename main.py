@@ -1,32 +1,34 @@
-import time
+from router import Router
 
-from task import Task
-from task_manager import TaskManager
-from times import second
+from flask import Flask
+
+app = Flask(__name__)
+router = Router()
 
 
-def generate_page():
-    with open("assets/style.css", "r") as f:
-        style = f.read()
-    with open("build/index.html", "w") as f:
-        f.write(f"<html><style>{style}</style><body>")
-        for task in _task_manager.task_list:
-            if task.is_far_from_due(): due_time_indicator = "far_from_due"
-            if task.is_close_to_due(): due_time_indicator = "close_to_due"
-            if task.is_imminently_due(): due_time_indicator = "imminently_due"
-            if task.is_overdue(): due_time_indicator = "overdue"
-            f.write(f"""
-<div class="taskrow">
-  <div class="task-indicator {due_time_indicator}"></div>
-  <div class="task">{task.name}</div>
-  <div class="task" style="float: right">{time.localtime(task.time_til_due())}</div>
-</div>""")
-        f.write("</body></html>")
+@app.route('/hello')
+def hello_world(): return router.hello_world()
+
+
+@app.route('/status/raw')
+def view_status_raw(): return router.view_status_raw()
+
+
+@app.route('/status')
+@app.route('/')
+def view_status(): return router.view_status()
+
+
+@app.route('/update/<name>')
+def update_with_name(name: str): return router.update_with_name(name)
+
+
+@app.route('/add/<name>/<duration>')
+def add_with_name(name: str, duration: int): return router.add_with_name(name, duration)
+
+@app.route('/help')
+def help(): return router.help()
 
 
 if __name__ == '__main__':
-    _task_manager = TaskManager()
-    _task_manager.read_from_file()
-    _task_manager.task_list.append(Task("testing", 10 * second, time.time().__floor__()))
-    generate_page()
-    _task_manager.write_to_file()
+    app.run()

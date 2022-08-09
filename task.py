@@ -1,4 +1,7 @@
 import time
+import datetime
+
+import timeago
 
 
 class Task:
@@ -26,6 +29,12 @@ class Task:
 
     def is_overdue(self):
         return self.time_til_due_percent() < 0
+
+    def formatted_task_time_left(self):
+        seconds_remaining = self.time_til_due().__floor__()
+        now = datetime.datetime.now()
+        due = datetime.datetime.now() + datetime.timedelta(seconds=seconds_remaining)
+        return timeago.format(due, now)
 
     @staticmethod
     def from_filestring(filestring: str):
