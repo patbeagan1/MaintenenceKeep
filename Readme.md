@@ -82,3 +82,4 @@ The columns are
 
 - Will create a page that shows previous access times for each of the tasks
 - Would be obviously be better if this was a sqlite db
+- Remove index file generation - no need to write it to disk if we will generate it anew every time
