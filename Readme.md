@@ -4,6 +4,9 @@ MaintenanceKeep is a program that will help you keep track of tasks that need to
 dashboard, and a series of URLs that you can access to notify the system that tasks have been completed. It's
 recommended to create QR codes for these URLs, so that you can easily check off tasks from everywhere.
 
+<img width="724" alt="Screen Shot 2022-08-10 at 12 05 39 AM" src="https://user-images.githubusercontent.com/10187351/183820075-21d150e5-bd0a-45af-936a-07d6a0b2dcb1.png">
+
+
 Some examples of things that you can keep track of
 
 - When to change the oil in your car
@@ -17,8 +20,7 @@ system to manage these tasks for you, so you know the state of your maintenance 
 
 ## Limitations
 
-This is a quick and dirty server which is intended to have less than 100 tasks, and be shared within one household. It
-would need to be refactored to be used for other use cases.
+This is a quick and dirty server which was intended to have less than 100 tasks, and be shared within one household. It may not scale very well if you have too many concurrent connections, or too many tasks to complete.
 
 ## How to read the data file
 
