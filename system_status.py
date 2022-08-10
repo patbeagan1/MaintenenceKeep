@@ -1,6 +1,5 @@
 from task_manager import TaskManager
 
-
 def generate_page(task_manager: TaskManager):
     with open("assets/style.css", "r") as f:
         style = f.read()

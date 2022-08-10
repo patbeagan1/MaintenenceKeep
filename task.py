@@ -36,10 +36,14 @@ class Task:
         due = datetime.datetime.now() + datetime.timedelta(seconds=seconds_remaining)
         return timeago.format(due, now)
 
-    @staticmethod
+    @classmethod
     def from_filestring(filestring: str):
         attr = filestring.split(",")
         return Task(attr[0], int(attr[1]), int(attr[2]))
 
     def to_filestring(self):
         return f"{self.name},{self.time_between_duedates},{self.time_last_completed}"
+
+    @classmethod
+    def from_pandas_row(cls, x):
+        return Task(x[0], x[1], x[2])

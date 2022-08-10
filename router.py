@@ -11,47 +11,29 @@ class Router:
 
     def view_status(self):
         _task_manager = TaskManager()
-        _task_manager.read_from_file()
         generate_page(_task_manager)
-        _task_manager.write_to_file()
         with open("build/index.html", "r") as f:
             return f.read()
 
     def update_with_name(self, name) -> str:
-        try:
-            with open("build/data.txt", "r") as f:
-                updated_lines = [
-                    Task.from_filestring(line)
-                    for line in f.readlines()
-                ]
+        task_manager = TaskManager()
+        already_exists = any(x.name == name for x in (task_manager.task_list))
 
-                matched_at_least_once = False
-                for each in updated_lines:
-                    if each.name == name:
-                        matched_at_least_once = True
-                        each.time_last_completed = time.time().__floor__()
+        if not already_exists:
+            return "Failure, not found"
 
-                if not matched_at_least_once:
-                    return "No matches"
+        with open("build/data.csv", "a") as f:
+            f.write("")
 
-                updated_lines = [
-                    it.to_filestring()
-                    for it in updated_lines
-                ]
-
-            with open("build/data.txt", "a") as f:
-                f.write("\n".join(updated_lines))
-            return "Success"
-        except:
-            return "Failure"
+        return "Success"
 
     def view_status_raw(self):
-        with open("build/data.txt", "r") as f:
+        with open("build/data.csv", "r") as f:
             return f.read()
 
     def add_with_name(self, name, duration):
         try:
-            with open("build/data.txt", "a") as f:
+            with open("build/data.csv", "a") as f:
                 f.write(Task(name, duration, time.time().__floor__()).to_filestring())
             return "Success"
         except Exception as e:
@@ -59,11 +41,11 @@ class Router:
 
     def help(self):
         return """
-        <html>
-        <body>
-        <a href="http://localhost:5000/add/testing/120"><p>Add task</p></a>
-        <a href="http://localhost:5000/update/testing"><p>Update task</p></a>
-        <a href="http://localhost:5000/"><p>Check Status</p></a>
-        </body>
-        </html>
-        """
+            <html>
+            <body>
+            <a href="http://localhost:5000/add/testing/120"><p>Add task</p></a>
+            <a href="http://localhost:5000/update/testing"><p>Update task</p></a>
+            <a href="http://localhost:5000/"><p>Check Status</p></a>
+            </body>
+            </html>
+            """
