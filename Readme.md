@@ -24,31 +24,30 @@ This is a quick and dirty server which was intended to have less than 100 tasks,
 
 ## API
 
+`@app.route('/hello')`
 
-#### `@app.route('/hello')`
+- Prints hello
 
-Prints hello
+`@app.route('/status/raw')`
 
-#### `@app.route('/status/raw')`
+- Prints out the contents of the current backing file
 
-Prints out the contents of the current backing file
+`@app.route('/status')`
+`@app.route('/')`
 
-#### `@app.route('/status')`
-#### `@app.route('/')`
+- Prints out the status page that lists all tasks
 
-Prints out the status page that lists all tasks
+`@app.route('/update/<name>')`
 
-#### `@app.route('/update/<name>')`
+- Adds a task update to the database, and prints whether the call succeeded
 
-Adds a task update to the database, and prints whether the call succeeded
+`@app.route('/add/<name>/<duration>')`
 
-#### `@app.route('/add/<name>/<duration>')`
+- Adds a brand new task to the database, and prints whether it succeeded
 
-Adds a brand new task to the database, and prints whether it succeeded
+`@app.route('/help')`
 
-#### `@app.route('/help')`
-
-A testing page that lets you add and update tasks
+- A testing page that lets you add and update tasks
 
 ## How to read the status page
 
