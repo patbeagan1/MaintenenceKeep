@@ -22,6 +22,34 @@ system to manage these tasks for you, so you know the state of your maintenance 
 
 This is a quick and dirty server which was intended to have less than 100 tasks, and be shared within one household. It may not scale very well if you have too many concurrent connections, or too many tasks to complete.
 
+## API
+
+
+#### `@app.route('/hello')`
+
+Prints hello
+
+#### `@app.route('/status/raw')`
+
+Prints out the contents of the current backing file
+
+#### `@app.route('/status')`
+#### `@app.route('/')`
+
+Prints out the status page that lists all tasks
+
+#### `@app.route('/update/<name>')`
+
+Adds a task update to the database, and prints whether the call succeeded
+
+#### `@app.route('/add/<name>/<duration>')`
+
+Adds a brand new task to the database, and prints whether it succeeded
+
+#### `@app.route('/help')`
+
+A testing page that lets you add and update tasks
+
 ## How to read the data file
 
 This is an example `data.txt` file
@@ -39,4 +67,5 @@ The columns are
 
 ## Roadmap
 
-TBD
+- Will create a page that shows previous access times for each of the tasks
+- Would be obviously be better if this was a sqlite db
