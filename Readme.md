@@ -37,4 +37,4 @@ The columns are
 
 ## Roadmap
 
-- Timestamps are cheap - make this be append only. Then we can just grab the max timestamp per name.
+TBD
