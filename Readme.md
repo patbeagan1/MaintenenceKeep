@@ -50,6 +50,19 @@ Adds a brand new task to the database, and prints whether it succeeded
 
 A testing page that lets you add and update tasks
 
+## How to read the status page
+
+Each row is a task that needs to be completed every so often. The tasks on the board are color coded based on how much time you have left to complete it
+
+- green
+  - you have more than 50% of the time left
+- yellowgreen
+  - you have more than 20% of the time left
+- yellow
+  - you still have time, but less than 20% left
+- red
+  - you are overdue
+
 ## How to read the data file
 
 This is an example `data.txt` file

@@ -1,6 +1,6 @@
 from task_manager import TaskManager
 
-def generate_page(task_manager: TaskManager):
+def generate_status_page(task_manager: TaskManager):
     with open("assets/style.css", "r") as f:
         style = f.read()
     with open("build/index.html", "w") as f:
@@ -15,7 +15,7 @@ def generate_page(task_manager: TaskManager):
 <div class="taskrow">
   <div class="task-indicator {due_time_indicator}"></div>
   <div class="task">{task.name}</div>
-  <div class="task-timer">{task.formatted_task_time_left()}</div>
+  <div class="task-timer">due {task.formatted_task_time_left()}</div>
 </div>""")
         f.write("</div></body></html>")
 

@@ -1,6 +1,6 @@
 import time
 
-from system_status import generate_page
+from generate_status_page import generate_status_page
 from task import Task
 from task_manager import TaskManager
 
@@ -11,7 +11,7 @@ class Router:
 
     def view_status(self):
         _task_manager = TaskManager()
-        generate_page(_task_manager)
+        generate_status_page(_task_manager)
         with open("build/index.html", "r") as f:
             return f.read()
 
