@@ -55,7 +55,7 @@ Each row is a task that needs to be completed every so often. The tasks on the b
 
 - green
   - you have more than 50% of the time left
-- yellowgreen
+- greenyellow
   - you have more than 20% of the time left
 - yellow
   - you still have time, but less than 20% left
