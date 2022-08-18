@@ -14,6 +14,7 @@ class TaskManager:
             Task.from_pandas_row(x)
             for x in self.dataframe.groupby("task").max().itertuples()
         ]
+        self.task_list.sort(key=lambda x: x.time_til_due_percent())
         self.task_list_all = [
             Task.from_pandas_row(x)
             for x in self.dataframe.itertuples(index=False)

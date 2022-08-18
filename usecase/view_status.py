@@ -15,7 +15,7 @@ def view_status():
         output.append(f"""
 <div class="taskrow">
   <div class="task-indicator {due_time_indicator}"></div>
-  <div class="task">{task.name}</div>
+  <a href="/view_updates/{task.name}"><div class="task">{task.name}</div></a>
   <div class="task-timer">due {task.formatted_task_time_left()}</div>
 </div>""")
     output.append("</div></body></html>")

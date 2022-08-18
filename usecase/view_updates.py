@@ -15,6 +15,9 @@ def view_updates(name):
     return f"""
     <html><style>{style()}</style><body>
     <div class="tasklist">
+    <button onClick="location.href='/update/{name}'"/>
+    <p>Update</p>
+    </button>
     <h1>{name}</h1>
     {items}
     </div><body><html>  
