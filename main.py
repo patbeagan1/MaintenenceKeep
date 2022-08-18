@@ -52,4 +52,4 @@ if __name__ == '__main__':
         with open(csv, "a") as f:
             f.write("task, recurrence, last_completed")
 
-    app.run()
+    app.run(host='0.0.0.0', debug=True)

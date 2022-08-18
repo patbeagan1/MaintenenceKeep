@@ -7,7 +7,7 @@ from task_manager import TaskManager
 def view_updates(name):
     _task_manager = TaskManager()
     matches = [time.gmtime(x.time_last_completed)
-               for x in _task_manager.task_list
+               for x in _task_manager.task_list_all
                if x.name == name]
     matches = [f"""<div class="taskrow">{time.strftime("%H:%M:%S %b %d, %Y (GMT %z)", x)}</div>"""
                for x in matches]

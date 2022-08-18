@@ -16,7 +16,7 @@ class TaskManager:
         ]
         self.task_list_all = [
             Task.from_pandas_row(x)
-            for x in self.dataframe.itertuples()
+            for x in self.dataframe.itertuples(index=False)
         ]
 
 
