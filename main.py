@@ -46,7 +46,22 @@ def check_file_empty(path_of_file):
     return os.path.exists(path_of_file) and os.stat(path_of_file).st_size == 0
 
 
+def check_sqlite():
+    import _sqlite3
+    print(_sqlite3.SQLITE_OK)
+    memory_db = ":memory:"
+    disk_db = "/tmp/maintenence-db"
+    db = _sqlite3.connect(disk_db)
+    # db.execute("create table HELLO (int)")
+    db.execute("insert into HELLO values(345)")
+    db.commit()
+    a = db.execute("select * from HELLO").fetchall()
+    print(a)
+
+
 if __name__ == '__main__':
+
+    check_sqlite()
     csv = "build/data.csv"
     if check_file_empty(csv):
         with open(csv, "a") as f:
