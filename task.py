@@ -44,6 +44,9 @@ class Task:
     def to_filestring(self):
         return f"{self.name},{self.time_between_duedates},{self.time_last_completed}"
 
+    def to_list(self):
+        return [self.name,self.time_between_duedates,self.time_last_completed]
+
     @classmethod
     def from_pandas_row(cls, x):
         return Task(x[0], x[1], x[2])
