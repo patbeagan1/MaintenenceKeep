@@ -1,27 +1,33 @@
-import typing
-
+import pandas
 from pandas import DataFrame
 
+from datamanager import DataManager
 from task import Task
-import pandas as pd
 
 
 class TaskManager:
     def __init__(self):
-        self.filename = "build/data.csv"
-        self.setup_dataframe()
-        self.task_list = [
+        self.data_manager = DataManager()
+
+    def dataframe(self):
+        return self.data_manager.get_dataframe()
+
+    def task_list_all(self):
+        return [
             Task.from_pandas_row(x)
-            for x in self.dataframe.groupby("task").max().itertuples()
-        ]
-        self.task_list.sort(key=lambda x: x.time_til_due_percent())
-        self.task_list_all = [
-            Task.from_pandas_row(x)
-            for x in self.dataframe.itertuples(index=False)
+            for x in self.dataframe().itertuples(index=False)
         ]
 
+    def task_list(self):
+        task_list = [
+            Task.from_pandas_row(x)
+            for x in self.dataframe().groupby("task").max().itertuples()
+        ]
+        task_list.sort(key=lambda x: x.time_til_due_percent())
+        return task_list
 
-    def setup_dataframe(self):
-        d = pd.read_csv(self.filename)
-        d = typing.cast(DataFrame, d)
-        self.dataframe = d
+    def read_all(self):
+        return self.data_manager.read_all()
+
+    def submit(self, task: Task):
+        self.data_manager.submit_to_file(task)
