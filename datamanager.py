@@ -29,7 +29,7 @@ class DataManager():
         memory_db = ":memory:"
         disk_db = "/tmp/maintenence-db"
         db = _sqlite3.connect(disk_db)
-        # db.execute("create table HELLO (int)")
+        db.execute("create table HELLO (int)")
         db.execute("insert into HELLO values(345)")
         db.commit()
         a = db.execute("select * from HELLO").fetchall()
