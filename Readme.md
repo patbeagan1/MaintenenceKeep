@@ -64,11 +64,12 @@ Each row is a task that needs to be completed every so often. The tasks on the b
 
 ## How to read the data file
 
-This is an example `data.txt` file
+This is an example `build/data.csv` file
 
 ```csv
-do the dishes,10,1660021049
-wash the dog,2419200,1660021119
+task, recurrance, last_completed
+do the dishes, 10, 1660021049
+wash the dog, 2419200, 1660021119
 ```
 
 The columns are
