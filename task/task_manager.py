@@ -2,13 +2,15 @@ import typing
 
 from pandas import DataFrame
 
-from task import Task
 import pandas as pd
+
+from task.task import Task
+from util.datamanager import get_data_filename
 
 
 class TaskManager:
     def __init__(self):
-        self.filename = "build/data.csv"
+        self.filename = get_data_filename()
         self.setup_dataframe()
         self.task_list = [
             Task.from_pandas_row(x)
@@ -19,7 +21,6 @@ class TaskManager:
             Task.from_pandas_row(x)
             for x in self.dataframe.itertuples(index=False)
         ]
-
 
     def setup_dataframe(self):
         d = pd.read_csv(self.filename)

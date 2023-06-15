@@ -39,6 +39,12 @@ body {
     padding: 20px;
 }
 
+.new-task-link {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
 .far_from_due { background: green;}
 .close_to_due { background: greenyellow;}
 .imminently_due { background: yellow;}

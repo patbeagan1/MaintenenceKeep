@@ -11,4 +11,5 @@ pytz==2023.3
 six==1.16.0
 timeago==1.0.16
 tzdata==2023.3
+tzlocal==5.0.1
 Werkzeug==2.3.6

@@ -22,6 +22,20 @@ system to manage these tasks for you, so you know the state of your maintenance 
 
 This is a quick and dirty server which was intended to have less than 100 tasks, and be shared within one household. It may not scale very well if you have too many concurrent connections, or too many tasks to complete.
 
+## How to run 
+
+To build, run `./docker-build.sh`, or
+
+```commandline
+sudo docker build --tag maintainence-keep .
+```
+
+To run, run `./dockerrun.sh`, or
+
+```commandline 
+sudo docker run -d --publish 5001:80 maintainence-keep
+```
+
 ## API
 
 `@app.route('/hello')`

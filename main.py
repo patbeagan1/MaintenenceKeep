@@ -1,14 +1,16 @@
+import argparse
 import os
 
-from flask import Flask
+from flask import Flask, request
 
-from usecase.add_with_name import add_with_name
-from usecase.hello_world import hello_world
-from usecase.help import help
-from usecase.update_with_name import update_with_name
-from usecase.view_status import view_status
-from usecase.view_status_raw import view_status_raw
-from usecase.view_updates import view_updates
+from routes.route_add_new_task import add_new_task
+from routes.route_add_with_name import add_with_name
+from routes.route_hello_world import hello_world
+from routes.route_update_with_name import update_with_name
+from routes.route_view_status import view_status
+from routes.route_view_status_raw import view_status_raw
+from routes.route_view_updates import view_updates
+from util.datamanager import get_data_filename, set_data_filename
 
 app = Flask(__name__)
 
@@ -34,8 +36,15 @@ def route_update_with_name(name: str): return update_with_name(name)
 def route_view_updates(name: str): return view_updates(name)
 
 
-@app.route('/add/<name>/<duration>')
-def route_add_with_name(name: str, duration: int): return add_with_name(name, duration)
+@app.route('/add_new_task')
+def route_add_new_task(): return add_new_task()
+
+
+@app.route('/add')
+def route_add_with_name():
+    name = request.args.get('name', '')
+    duration = request.args.get('seconds', '')
+    return add_with_name(name, duration)
 
 
 @app.route('/help')
@@ -47,9 +56,16 @@ def check_file_empty(path_of_file):
 
 
 if __name__ == '__main__':
-    csv = "build/data.csv"
-    if check_file_empty(csv):
-        with open(csv, "a") as f:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        'filename',
+        type=str,
+        help='The name of the backing csv file')
+    args = parser.parse_args()
+    set_data_filename(args.filename)
+
+    if check_file_empty(get_data_filename()):
+        with open(get_data_filename(), "a") as f:
             f.write("task, recurrence, last_completed")
 
     app.run(host='0.0.0.0', debug=True)
