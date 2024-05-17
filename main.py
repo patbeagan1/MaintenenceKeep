@@ -4,63 +4,88 @@ import os
 from flask import Flask, request
 
 from routes.route_add_new_task import add_new_task
+from routes.route_add_new_timer import add_new_timer, save_new_timer
 from routes.route_add_with_name import add_with_name
 from routes.route_hello_world import hello_world
 from routes.route_update_with_name import update_with_name
 from routes.route_view_status import view_status
 from routes.route_view_status_raw import view_status_raw
 from routes.route_view_updates import view_updates
+from routes.route_view_timers import view_timers
+from util.TimerManager import TimerManager
 from util.datamanager import get_data_filename, set_data_filename
 
 app = Flask(__name__)
 
 
-@app.route('/hello')
-def route_hello_world(): return hello_world()
+@app.route("/hello")
+def route_hello_world():
+    return hello_world()
 
 
-@app.route('/status/raw')
-def route_view_status_raw(): return view_status_raw()
+@app.route("/status/raw")
+def route_view_status_raw():
+    return view_status_raw()
 
 
-@app.route('/status')
-@app.route('/')
-def route_view_status(): return view_status()
+@app.route("/status")
+@app.route("/")
+def route_view_status():
+    return view_status()
 
 
-@app.route('/update/<name>')
-def route_update_with_name(name: str): return update_with_name(name)
+@app.route("/update/<name>")
+def route_update_with_name(name: str):
+    return update_with_name(name)
 
 
-@app.route('/view_updates/<name>')
-def route_view_updates(name: str): return view_updates(name)
+@app.route("/view_updates/<name>")
+def route_view_updates(name: str):
+    return view_updates(name)
 
 
-@app.route('/add_new_task')
-def route_add_new_task(): return add_new_task()
+@app.route("/add_new_task")
+def route_add_new_task():
+    return add_new_task()
 
 
-@app.route('/add')
+@app.route("/add")
 def route_add_with_name():
-    name = request.args.get('name', '')
-    duration = request.args.get('seconds', '')
+    name = request.args.get("name", "")
+    duration = request.args.get("seconds", "")
     return add_with_name(name, duration)
 
 
-@app.route('/help')
-def route_help(): return help()
+@app.route("/help")
+def route_help():
+    return help()
+
+
+_timer_manager = TimerManager()
+
+
+@app.route("/timers")
+def route_timers():
+    return view_timers(_timer_manager)
+
+
+@app.route("/add_new_timer")
+def new_timer():
+    return add_new_timer()
+
+
+@app.route("/save_new_timer", methods=["POST"])
+def save_timer():
+    return save_new_timer(request, _timer_manager)
 
 
 def check_file_empty(path_of_file):
     return os.path.exists(path_of_file) and os.stat(path_of_file).st_size == 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        'filename',
-        type=str,
-        help='The name of the backing csv file')
+    parser.add_argument("filename", type=str, help="The name of the backing csv file")
     args = parser.parse_args()
     set_data_filename(args.filename)
 
@@ -68,4 +93,4 @@ if __name__ == '__main__':
         with open(get_data_filename(), "a") as f:
             f.write("task, recurrence, last_completed")
 
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host="0.0.0.0", debug=True)

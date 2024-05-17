@@ -30,10 +30,10 @@ To build, run `./docker-build.sh`, or
 sudo docker build --tag maintainence-keep .
 ```
 
-To run, run `./docker-run.sh`, or
+To run, run `./dockerrun.sh`, or
 
 ```commandline 
-sudo docker run -d --publish 5001:5000 maintainence-keep
+sudo docker run -d --publish 5001:80 maintainence-keep
 ```
 
 ## API
